@@ -1,0 +1,202 @@
+<body>
+    <div class="top_head_section">
+            <div class="container clears">
+                <div class="top_head">
+    
+                        <nav class="navbar">
+    
+                                <span class="open-slide">
+                                    <div   onclick="openSideMenu()">
+                                        <i class="fa fa-bars"></i>
+                                    </div>
+                                </span>
+                    
+                            </nav>
+    
+                    
+                    <div class="top_left05">
+    
+                        <div class="logo"> <img src='assets/Fmi_login.png'></div>
+                        
+                    </div>
+    
+    
+    
+    
+                    <div class="top_right side-nav" id="side-menu">
+    
+                        <div class="total_menu">
+                            <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+                    
+    
+                        <div class="menu">
+                            <div class="topnav">
+                                <ul>
+                                   <li><a *ngIf="IsTeacher=='false'"  routerLink="/clients">Clients</a></li>
+                                  <li *ngIf="IsTeacher=='true'" ><a class="active" routerLink="/teacher">Main Screen</a></li>
+                                   
+                                   
+                                   <li class="active"><a class="active" routerLink="/announcements">Announcements</a></li>
+                                   <li><a *ngIf="IsTeacher=='false'" routerLink="/deals">Deals</a></li>
+                                   <li><a *ngIf="IsTeacher=='false'" routerLink="/market">Market Info</a></li>
+                                   <li *ngIf="IsTeacher=='true'"><a  routerLink="/performance" >Performance Summary</a></li>
+                                   <li *ngIf="IsTeacher=='true'" ><a routerLink="/siminfo">All Info</a></li>
+                                <li *ngIf="performance==true"><a  *ngIf="IsTeacher=='false'" routerLink="/performance" >Performance</a></li>
+                                   <li><span>{{bank | uppercase}} <i class="fa fa-angle-down"></i></span>
+                                        <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>Logout</span></div>
+    
+                                    </li>
+    
+                                </ul>
+                            </div>
+                       
+    
+    
+                        </div>
+                    </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+        </div>
+
+
+<div class="trade_section padd">
+    <div class="container">
+        <!-- <div class="title_head">
+            <h3 class="title22">Announcements</h3>
+        </div> -->
+    
+
+
+<div class="client_row">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 margin_btm_rsp20">
+            <div class="finance_category analyst98 announce">
+                <h2>Deals in Process</h2>
+                <div  class="table_cover">
+                    <table class="announce_table" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Timer
+                                        
+                                    </th>
+                                    <th>
+                                    Offer From
+                                        
+                                    </th>
+                                    <th>
+                                    Offer To
+                                </th>
+                                
+                                <th>
+                                    Acquired Sector
+                                </th>
+                                <th>
+                                    Premium %
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="announcements?.length>0">
+                            <tr  *ngFor="let x of announcements.slice().reverse()">
+                                
+                                <td><i *ngIf="x.time>0;" class="fa fa-clock-o" style="font-size:24px">{{x.time}}</i></td>
+                            
+                                <td >{{x.offer_made_by}}, {{x.myclient}}</td>
+                            
+                            
+                            <td>{{x.bank_num}}, {{x.client_name}}</td>
+                        
+                            
+                        
+                            
+                            <td>
+                                {{ x.sector}}
+                            </td>
+                        
+                            
+                            <td>
+                                {{ x.price}} %
+                            </td>
+                        
+                            
+                            
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="finance_category analyst98 announce">
+                    <h2> Confirmed/Cancelled Announcements</h2>
+                    <div class="table_cover">
+                        <div class="announce_table"> 
+                            <table width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Status
+                                            </th>
+                                            <th>
+                                                Offer from
+                                                
+                                            </th>
+                                            <th>
+                                                Offer to
+                                            </th>
+                                            
+                                            <th>
+                                                Premium %
+                                            </th>
+                                            <th>
+                                                Acquired Sector
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr  *ngFor="let x of announcements2.slice().reverse()">
+                                            
+                                            <td  *ngIf="x.confirmed==1"><button class="sts_btn" type="button" style="background:green">Confirmed</button></td>
+                                            <td  *ngIf="x.confirmed==0"><button class="sts_btn" type="button" style="background:red">Cancelled by {{x.cancelled_by}}</button></td>
+                                    
+                                            
+                                            <td >{{x.offer_made_by}}, {{x.myclient}}</td>
+                                    
+                                    
+                                        <td> {{x.bank_num}}, {{x.client_name}}</td>                          
+                                    
+                                        <td>
+                                        {{ x.price}} %
+                                        </td>
+                                    
+                                        
+                                        <td>
+                                        {{ x.sector}}
+                                        </td>
+                                    </tr>
+                                    
+                                    
+                                </tbody>
+                            </table>
+                        </div>  
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>    
+
+
+</div>
+</div>
+
+
+
+</body>
+

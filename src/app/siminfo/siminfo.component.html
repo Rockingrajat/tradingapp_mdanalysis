@@ -1,0 +1,210 @@
+
+<body>
+<div class="top_head_section" >
+        <div class="container clears">
+            <div class="top_head">
+      
+                <nav class="navbar">
+      
+                        <span class="open-slide">
+                            <div   onclick="openSideMenu()">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                        </span>
+            
+                </nav>
+                
+                <div class="top_left05">
+                    <div class="logo"> <img src='assets/Fmi_login.png'></div>
+                </div>
+      
+      
+                <div class="top_right side-nav" id="side-menu">
+      
+                    <div class="total_menu">
+      
+                        <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+      
+                        <div class="menu">
+                            <div class="topnav">
+                                <ul>
+                               
+                                <li ><a  routerLink="/teacher">Main Screen </a></li>
+                                <li><span routerLink="/announcements">Announcements</span></li>
+                                <li><span routerLink="/performance">Performance Summary</span></li>
+                                <li class="active"><a routerLink="/siminfo">All Info</a></li>  
+      
+                
+                              <li>
+      
+                                   <span>Teacher <i class="fa fa-angle-down"></i></span>
+                                   <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>Logout</span></div>
+                                
+                                </li> 
+      
+      
+                                </ul>
+                            </div>
+                        
+      
+                        </div>
+      
+                   </div>
+      
+                </div>
+      
+            </div>
+      
+        </div>
+      </div>
+
+
+
+    <!-- 
+        <div class="number_box" >
+    
+            <ul>
+    
+                <li><span>Bank</span></li>
+                <li><input type='number' [(ngModel)]='id'></li>
+    
+                <li>
+                    <div class="updown">
+                        <button (click)='Change(1)' style="margin: 0.5%;"><i class="fa fa-angle-up"></i></button>
+                        <button (click)='Change(-1)'><i class="fa fa-angle-down"></i></button>
+                    </div>
+                </li>
+    
+    
+            </ul>
+    
+        </div> -->
+    
+        
+   
+    
+    <div class="trade_section padd">
+        <div class="container">
+        
+            <!-- <h2> Bank{{id}}</h2> -->
+
+
+            <div class="title_head">
+                    
+                    <div style="display:flex;">
+                        <h3><span>Bank</span></h3>
+                        <h3><span type='number' [(ngModel)]='id'>{{id}}</span></h3>
+            
+                        
+                            <div class="updown">
+                                <button (click)='Change(1)' style="margin: 0.5%;"><i class="fa fa-angle-up"></i></button>
+                                <button (click)='Change(-1)'><i class="fa fa-angle-down"></i></button>
+                            </div>
+                        
+                    </div>
+                </div>
+
+            <div class="finance_category analyst98 market_sec" style="height:auto">
+
+                <div class=" table_cover">
+                    <div  class="markt_table">
+                    <table width="100%" class="market_info02">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Ebit</th>
+                                <th>Desc</th>
+                                <th>Index</th>
+                                <th>Net Income</th>
+                                <th>Makret Cap</th>
+                                <th>No Shares</th>
+                                <th>Revenue</th>
+                                <th>Sector</th>
+                                <th>Total Assets</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody >
+                        <tr *ngFor="let client of clients; index as i" >
+                            
+                        <td><span type="text" [(ngModel)]="abc" ngDefaultControl (input)="client.client_name=$event.target.innerText" contenteditable>{{client.client_name}}</span></td>
+
+
+                        <td><span [(ngModel)]="abc" ngDefaultControl (input)="client.ebit=$event.target.innerText" contenteditable>{{client.ebit}}</span></td>
+
+
+                        <td> <span [(ngModel)]="abc" ngDefaultControl (input)="client.desc=$event.target.innerText" contenteditable>{{client.desc}}</span></td>
+
+
+                        <td><span [(ngModel)]="abc" ngDefaultControl (input)="client.index=$event.target.innerText" contenteditable>{{client.index}}</span></td>
+                        <td><span [(ngModel)]="abc"ngDefaultControl (input)="client.net_inc=$event.target.innerText" contenteditable>{{client.net_inc}}</span></td>
+                        <td> <span [(ngModel)]="abc" ngDefaultControl (input)="client.market_cap=$event.target.innerText" contenteditable>{{client.market_cap}}</span></td>
+                        <td><span [(ngModel)]="abc" ngDefaultControl (input)="client.num_shares=$event.target.innerText" contenteditable>{{client.num_shares}}</span></td>
+                        <td><span [(ngModel)]="abc" ngDefaultControl (input)="client.revenue=$event.target.innerText" contenteditable>{{client.revenue}}</span></td>
+                        <td> <span [(ngModel)]="abc" ngDefaultControl (input)="client.sector=$event.target.innerText" contenteditable>{{client.sector}}</span></td>
+                        <td>  <span [(ngModel)]="abc" ngDefaultControl (input)="client.total_assets=$event.target.innerText" contenteditable>{{client.total_assets}}</span></td>
+                        <td><button style="color:#498b2b; border-color:#498b2b" class="dflt_btn66" (click)='ModifyInfo(client)' type="submit">Save</button></td>
+                        <td><button style="color:crimson; border-color:crimson" class="dflt_btn66"  (click)='DeleteClient(client)' type="submit">Delete</button></td>
+
+                        <!-- </tbody> -->
+
+                  <!--   <span *ngIf="i%2==0" style="display:flex;">
+                        <button style="margin:10px" (click)='ModifyInfo(client)' type="submit">Save Changes</button>
+                        <button style="margin:10px; width:auto" (click)='DeleteClient(client)' type="submit">Delete</button>
+                    </span> -->
+
+
+
+                    
+                    <!-- <tbody  *ngIf="i%2==0 && i+1!=clients.length"> -->
+
+                    
+                            
+                         <!--    <td><span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].client_name=$event.target.innerText" contenteditable>{{clients[i+1].client_name}}</span></td>
+                            
+                                
+                            <td><span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].ebit=$event.target.innerText" contenteditable>{{clients[i+1].ebit}}</span></td>
+                            
+                            <td> <span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].desc=$event.target.innerText" contenteditable>{{clients[i+1].desc}}</span></td>
+                           
+                                   
+                                    <td><span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].index=$event.target.innerText" contenteditable>{{clients[i+1].index}}</span></td>
+                                
+                                   
+                                    <td><span [(ngModel)]="abc"ngDefaultControl (input)="clients[i+1].net_inc=$event.target.innerText" contenteditable>{{clients[i+1].net_inc}}</span></td>
+                          
+                                <td> <span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].market_cap=$event.target.innerText" contenteditable>{{clients[i+1].market_cap}}</span></td>
+                               
+                                    <td><span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].num_shares=$event.target.innerText" contenteditable>{{clients[i+1].num_shares}}</span></td>
+                               
+                                    
+                                    <td><span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].revenue=$event.target.innerText" contenteditable>{{clients[i+1].revenue}}</span></td>
+                            
+                                <td> <span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].sector=$event.target.innerText" contenteditable>{{clients[i+1].sector}}</span></td>
+                           
+                                <td>  <span [(ngModel)]="abc" ngDefaultControl (input)="clients[i+1].total_assets=$event.target.innerText" contenteditable>{{clients[i+1].total_assets}}</span></td> -->
+                        </tr>
+                            
+                            
+                        </tbody>
+                      <!--   <span  *ngIf="i%2==0 && i+1!=clients.length" style="display:flex;">
+                            <button style="margin:10px; width:auto" (click)='ModifyInfo(clients[i+1])' type="submit">Save Changes</button>
+                            <button style="margin:10px; width:auto" (click)='DeleteClient(clients[i+1])' type="submit">Delete</button>
+                        </span> -->
+                    </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        
+        </div>               
+    </div>    
+</body>

@@ -1,0 +1,319 @@
+<body>
+    
+    <div class="top_head_section">
+            <div class="container clears">
+                <div class="top_head">
+    
+                    <nav class="navbar">
+    
+                            <span class="open-slide">
+                                <div   onclick="openSideMenu()">
+                                    <i class="fa fa-bars"></i>
+                                </div>
+                            </span>
+                
+                    </nav>
+                    
+                    <div class="top_left05">
+                        <div class="logo"> <img src='assets/Fmi_login.png'></div>
+                    </div>
+    
+    
+                    <div class="top_right side-nav" id="side-menu">
+    
+                        <div class="total_menu">
+    
+                            <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+    
+                            <div class="menu">
+                                <div class="topnav">
+                                    <ul>
+                                    <li><a  routerLink="/clients">Clients</a></li>
+                                    <!--  <li><a *ngIf="IsTeacher=='true'" routerLink="/teacher">Main Screen</a></li> -->
+                                    <li><a  routerLink="/announcements">Announcements</a></li>
+                                    <li class="active"><a  routerLink="/deals">Deals</a></li>
+                                    <li><a  routerLink="/market">Market Info</a></li>
+                                    <!-- <li><a *ngIf="IsTeacher=='true'" routerLink="/performance" >Performance Summary</a></li> -->
+                                    <li *ngIf="performance==true"><a  routerLink="/performance" >Performance</a></li>
+                                    <!-- <li><a class="active" *ngIf="IsTeacher=='true'" routerLink="/siminfo">All Info</a></li> -->
+                                    <li><span>{{bank | uppercase}} <i class="fa fa-angle-down"></i></span>
+                                    <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>Logout</span></div>
+                                    </li>
+    
+                                    </ul>
+                                </div>
+                            
+    
+                            </div>
+    
+                       </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    </div>
+    
+    
+    <div class="deal_section padd">
+        <div class="container">
+    
+            <!-- <div class="title_head">
+                <h3 class="title22">Deal</h3>
+               
+            </div> -->
+            
+    
+    
+            <div class="top_submit_section deal_marg_btm">
+                <div class="finance_category" style="height: auto;">
+                    <h2>Make An Offer</h2>
+                    <div class="serv_input_part">
+                        <table width="100%">
+                            <tr>
+                                <td style="width:18%">
+                                    <label>Client</label>
+                                    <select *ngIf="activate==true" [(ngModel)]='myclient' required>
+                                    <option *ngFor="let x of my_clients" value={{x}}>{{x}}</option>
+                                    </select>
+                                    <input *ngIf="activate==false" type="number" placeholder="Client name" [(ngModel)]='price'  required>
+                                </td>
+    
+                                <td style="width:18%">
+                                    <label>Bank</label>
+                                    <select *ngIf="activate==true" [(ngModel)]='bank_num' (change)="getClients($event.target.value);" required>
+                                    <option *ngFor="let x of bank_list" value={{x}}>{{x}}</option>
+                                    </select>
+                                    <input *ngIf="activate==false" type="number" placeholder="Bank" [(ngModel)]='price'  required>
+                                </td>
+    
+                                <td style="width:18%">
+                                        <label>Acquire Client</label>
+                                        <input *ngIf="activate==false" type="number" placeholder="Acquire Client" [(ngModel)]='price'  required>
+                                        <select *ngIf="activate==true" [(ngModel)]='client_name' required>
+                                            <option *ngFor="let x of client_list" value={{x}}>{{x}}</option>
+                                         </select>
+                                         
+                                </td>
+                                
+                                  
+                                <td style="width:18%">
+                                        <label for="psw">% premium (Market Price)</label>
+                                        <input type="number" placeholder="Enter % Premium" [(ngModel)]='price'  required>
+                                </td>
+    
+                                <td style="width:18%">
+                                        <label>Additional Info:</label>
+                                        <input placeholder="Additional Info" [(ngModel)]='add_info' required>
+                                </td>
+    
+                                <td style="width:10%">
+                                    <label>&nbsp;</label>
+                                    <button (click)='SendOffer()' [disabled]="activate==false" type="submit" class="dft_btn2">Submit</button>
+                                    <span *ngIf="activate==false">Oops! Can't make any deals for now!</span>
+                                </td>
+                            </tr>
+                        </table>
+    
+    
+    
+    
+                    
+    
+    
+    
+    
+    
+                    </div>    
+                </div>
+            </div>
+    
+            <div class="deal_confirm_section deal_marg_btm">
+                <div class="row">
+    
+                    <div class="col-lg-6 col-md-6 deal_block">
+                        <div class="finance_category analyst98 deal256">
+                            <h2>Deals Confirmed</h2> 
+                            <div class="table_cover"> 
+                                <div class="deal_table">
+                                <table  width="100%" *ngIf="deals?.length>0; else nodeals">
+                                    <tr>
+                                        <th style="width:12%">Offer By</th>
+                                        <th style="width:12%">Offer To</th>
+                                        <th style="width:8%">% Premium</th>
+                                        <th style="width:12%">Add Info</th>
+                                    </tr>
+                                    
+                                    <tr *ngFor="let x of deals.slice().reverse()">
+                                        <td>{{x.offer_made_by}}, {{x.myclient}}</td>
+                                        <td>{{x.bank_num}}, {{x.client_name}}</td>
+                                        <td>{{x.price}}%</td>
+                                        <td>{{x.info}}</td>
+                                    </tr>
+                                </table>
+                                <ng-template #nodeals>
+                                    <tr>
+                                        
+                                        <th style="width:12%">Offer By</th>
+                                        <th style="width:12%">Offer To</th>
+                                        <th style="width:8%">% Premium</th>
+                                        <th style="width:12%">Add Info</th>
+                                    </tr>
+                                </ng-template>
+                                </div>
+                            </div>
+    
+                             
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-6 col-md-6">
+                        <div class="finance_category analyst98 deal256">
+                            <h2>Deals Sent</h2>
+    
+                            <div class="table_cover">
+                                <div class="deal_table">
+                                <table width="100%" *ngIf="pending_sent?.length>0; else noPendingdeals">
+                                    <tr>
+                                        <th style="width:8%">Time</th>
+                                        <th style="width:8%">Offer From</th>
+                                        <th style="width:10%">Offer To</th>
+                                        <th style="width:8%">% Premium</th>
+                                        <th style="width:12%">Add Info</th>
+                                        <th style="width:8%"></th>
+                                    </tr>
+                                    <!-- <span *ngIf="pending_sent?.length>0"> -->
+                                    <tr *ngFor="let x of pending_sent.slice().reverse()">
+                                        <td><i *ngIf="x.time>0;" class="fa fa-clock-o" style="font-size:24px">{{x.time}}</i></td>
+                                        
+                                        <td>{{x.offer_made_by}}, {{x.myclient}}</td>
+                                        
+                                        <td>{{x.bank_num}}, {{x.client_name}}</td>
+                                        
+                                        
+                                        <td>{{x.price}}%</td>
+                                        <td>{{x.info}}</td>
+                                        <td><button style="background:red" (click)='CancelOffer(x)' type="button" class="cancelbtn dl_btn01" >Cancel</button></td>
+                                    </tr>
+                                <!-- </span> -->
+                                </table>
+                                <ng-template #noPendingdeals>
+                                    <tr>
+                                        <th style="width:8%">Time</th>
+                                        <th style="width:8%">Offer From</th>
+                                        <th style="width:10%">Offer To</th>
+                                        <th style="width:8%">% Premium</th>
+                                        <th style="width:12%">Add Info</th>
+                                        <th style="width:8%"></th>
+                                    </tr>
+                                </ng-template>
+                                </div>
+                            </div>
+    
+                      
+    
+    
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="offer_section">
+                <div class="row">
+                        <div class="col-lg-6 col-md-6 deal_block">
+                                <div class="finance_category analyst98 deal256">
+                                    <h2>Offer Received</h2> 
+            
+                                    <div class="table_cover">
+                                        <div class="deal_table">
+                                        <table width="100%" >
+                                                            <!-- *ngIf="rec_offers?.length>0"> -->
+                                            <tr>
+                                                <th style="width:8%">Offer From</th>
+                                                <th style="width:8%">Offer To</th>
+                                               
+                                                
+                                                <th style="width:8%">% Premium</th>
+                                                <th style="width:8%">Add Info</th>
+                                                <th  style="width:6%"></th>
+                                                <th style="width:6%"></th>
+                                                
+                                            </tr>
+            
+                                            <tr *ngFor="let x of rec_offers.slice().reverse()">
+                                                
+                                                
+                                                <td>{{x.offer_made_by}}, {{x.myclient}}</td>
+                                                <td>{{x.bank_num}}, {{x.client_name}}</td>
+                                                
+                                                <td>{{x.price}}%</td>
+                                                <td>{{x.info}}</td>
+                                                <td><button   class="cancelbtn dl_btn01" (click)='ConfirmReceivedOffer(x)' type="submit" style="background: green">Announce</button></td>
+                                                <td> <button class="dl_btn01" (click)='CancelReceivedOffer(x)' type="button" style="background: red">Cancel</button></td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                            
+              
+    
+    
+    
+    
+                    <br>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="finance_category analyst98 deal256">
+                            
+                            <h2>Pending Announcement</h2> 
+                            <div class="table_cover">
+                                <div class="deal_table">
+                                    <table width="100%" >
+                                        <tr>
+                                            <th style="width:8%">Time</th>
+                                            <th style="width:8%">Offer From</th>
+                                            <th style="width:8%">Offer To</th>
+                                            <th style="width:8%">% Premium</th>
+                                            <th style="width:8%">Add Info</th>
+                                            <th style="width:12%"></th>
+                                        </tr>
+        
+                                        <tr *ngFor="let x of pending_rec.slice().reverse()">
+                                            <td><i *ngIf="x.time>0;" class="fa fa-clock-o" style="font-size:24px">{{x.time}}</i></td>
+                                            
+                                            <td>{{x.offer_made_by}}, {{x.myclient}}</td>
+                                            <td>{{x.bank_num}}, {{x.client_name}}</td>
+                                            
+                                            <td>{{x.price}}%</td>
+                                            <td>{{x.info}}</td>
+                                            <td><button style="background: red" (click)='CancelPendingReceivedOffer(x)' type="button" class="cancelbtn dl_btn01">Cancel</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+    
+    
+    
+    
+    
+                </div>
+            </div>
+    
+    
+        </div>
+    </div>
+    
+    
+    
+    
+    </body>
+    
+    

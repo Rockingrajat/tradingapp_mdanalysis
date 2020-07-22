@@ -1,0 +1,15 @@
+<body>
+    
+    <h1>
+        Trading App</h1>
+    <form method="POST">
+        <p class="blabla">Sign in to start your session</p><br>
+        <input placeholder="Email" type="text" [(ngModel)]='Email' name='Email' />
+        <input placeholder="Password" type="password" [(ngModel)]='Password' name='Password' />
+        <span style="display:flex"><input type="checkbox" name="checkRemember" id="cbRM" />Remember Me</span>
+        <input type="button" class="btn" (click)='SignIn()' value="Sign In"><br><br>
+        <a href="ForgotPass.html">I forgot my password</a><br>
+        <a href="ResetPass.html">Reset my password</a><br>
+        <a href="Register.html">Register a new membership</a>
+    </form>
+</body>

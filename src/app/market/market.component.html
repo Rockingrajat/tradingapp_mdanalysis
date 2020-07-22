@@ -1,0 +1,138 @@
+    <body>
+
+        <div class="top_head_section">
+                <div class="container clears">
+                    <div class="top_head">
+        
+                        <nav class="navbar">
+        
+                                <span class="open-slide">
+                                    <div   onclick="openSideMenu()">
+                                        <i class="fa fa-bars"></i>
+                                    </div>
+                                </span>
+                    
+                        </nav>
+                        
+                        <div class="top_left05">
+                            <div class="logo"> <img src='assets/Fmi_login.png'></div>
+                        </div>
+        
+        
+                        <div class="top_right side-nav" id="side-menu">
+        
+                            <div class="total_menu">
+        
+                                <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+        
+                                <div class="menu">
+                                    <div class="topnav">
+                                        <ul>
+                                        <li><a  routerLink="/clients">Clients</a></li>
+                                         <!-- <li><a *ngIf="IsTeacher=='true'" routerLink="/teacher">Main Screen</a></li> -->
+                                        <li><a  routerLink="/announcements">Announcements</a></li>
+                                        <li><a  routerLink="/deals">Deals</a></li>
+                                        <li class="active"><a  routerLink="/market">Market Info</a></li>
+                                        <!-- <li><a *ngIf="IsTeacher=='true'" routerLink="/performance" >Performance Summary</a></li> -->
+                                        <li *ngIf="performance==true"><a  routerLink="/performance" >Performance</a></li>
+                                        <!-- <li><a class="active" *ngIf="IsTeacher=='true'" routerLink="/siminfo">All Info</a></li> -->
+                                        <li><span>{{bank | uppercase}} <i class="fa fa-angle-down"></i></span>
+                                        <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>Logout</span></div>
+        
+                                        </li>
+        
+                                        </ul>
+                                    </div>
+                                
+        
+                                </div>
+        
+                           </div>
+        
+                        </div>
+        
+                    </div>
+        
+                </div>
+        </div>
+        
+        
+        
+        
+        <div class="trade_section padd">
+        
+                <div class="container">
+        
+                    <div class="title_head">
+                        <h3 class="title22">Market Info</h3>
+                        <div class="drop_down">
+                            <select  [(ngModel)]="sort" (change)='newValue($event)'>
+                                <option value="mark_cap" >Market Cap</option>
+                                <option value="sector" >Sector</option>
+                                <option value="bank">Bank (default)</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <div class="finance_category analyst98 market_sec" style="height:auto">
+        
+                            <h2>Marketplace</h2>
+                            <div class="table_cover">
+                             <div class="markt_table">   
+                            <table width="100%" class="market_info02">
+                                    <thead>
+                                        <tr class="table100-head" >
+                                            <th>Bank</th>
+                                            <th>Client</th>
+                                            <th>Revenue</th>
+                                            <th>Market Cap</th>
+                                            <th>Index</th>
+                                            <th>Description</th>
+                                            <th>EBIT</th>
+                                            <th>Total assets</th>
+                                            <th>No of Shares</th>
+                                            <th>Sector</th>
+                                            <th>Net Income</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody *ngFor="let x of clients" >                
+                                        <tr>
+                                            <td> {{x.bank}}</td>
+                                            <td> {{x.client_name}}</td>
+                                            <td> {{x.revenue}}</td>
+                                            <td> {{x.market_cap}}</td>
+                                            <td> {{x.index}}</td>
+                                            <td> {{x.desc}}</td>
+                                            <td> {{x.ebit}}</td>
+                                            <td> {{x.total_assets}}</td>
+                                            <td> {{x.num_shares}}</td>
+                                            <td> {{x.sector}}</td>
+                                            <td>{{x.net_inc}}</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                            </table>
+                            </div>
+                            </div>
+                           
+                    </div>
+        
+                </div>
+        
+        </div>
+        
+        
+        
+        
+        
+         
+        <!--     <div>
+                Sort By:
+                <input type="radio"  [(ngModel)]="sort" value="mark_cap" (click)='newValue($event)'>Market Cap
+                <input type="radio" [(ngModel)]="sort"  value="sector" (click)='newValue($event)'>Sector
+                <input type="radio" [(ngModel)]="sort" value="bank" (click)='newValue($event)'>Bank (default)
+            </div> -->
+        
+            </body>
+        

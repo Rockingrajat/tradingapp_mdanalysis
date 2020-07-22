@@ -1,0 +1,248 @@
+<body>
+
+    <div class="top_head_section">
+        <div class="container clears">
+            <div class="top_head">
+
+                    <nav class="navbar">
+
+                            <span class="open-slide">
+                                <div   onclick="openSideMenu()">
+                                    <i class="fa fa-bars"></i>
+                                </div>
+                            </span>
+                
+                        </nav>
+
+                
+                <div class="top_left05">
+
+                    <div class="logo"> <img src='assets/Fmi_login.png'></div>
+                    
+                </div>
+
+
+
+
+                <div class="top_right side-nav" id="side-menu">
+
+                    <div class="total_menu">
+                        <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+                
+
+                    <div class="menu">
+                        <div class="topnav">
+                            <ul>
+                            <li *ngIf="IsTeacher=='false'" ><a  routerLink="/clients">Clients</a></li>
+                             <li *ngIf="IsTeacher=='true'"><a  routerLink="/teacher">Main Screen</a></li>
+                            <li><a class="active" routerLink="/announcements">Announcements</a></li>
+                            <li *ngIf="IsTeacher=='false'"><a  routerLink="/deals">Deals</a></li>
+                            <li *ngIf="IsTeacher=='false'" ><a routerLink="/market">Market Info</a></li>
+                            <li class="active"  *ngIf="IsTeacher=='true'" ><a routerLink="/performance" >Performance Summary</a></li>
+                            <li class="active" *ngIf="IsTeacher=='false'"><a  routerLink="/performance" >Performance</a></li>
+                            <li *ngIf="IsTeacher=='true'" class="active" ><a routerLink="/siminfo">All Info</a></li>
+                            <li><span>{{bank | uppercase}} <i class="fa fa-angle-down"></i></span>
+                            <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>{{bank | uppercase}}</span></div>
+
+                            </li>
+
+                            </ul>
+                        </div>
+                        <!-- <ul>
+
+                        </ul> -->
+
+
+                    </div>
+                </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<!-- <div class="nmber_sec">
+<div class="number_box" >
+
+    <ul>
+
+        
+       
+
+
+    </ul>
+
+</div>
+
+<button  class="dft_btn" style="color: #004785; border-color: #004785">Reset</button>
+</div> -->
+
+
+
+<!-- <h2> Bank{{id}}</h2> -->
+
+<div class="perform_section">
+
+<div class="service_top_row admn_row55">
+<div class="container">
+
+
+    <div class="title_head">
+                    
+        <div style="display:flex;">
+            <h3><span>Bank</span></h3>
+            <h3><span type='number' [(ngModel)]='id'>{{id}}</span></h3>
+
+            
+                <div *ngIf="IsTeacher=='true'" class="updown">
+                    <button (click)='Change(1)' style="margin: 0.5%;"><i class="fa fa-angle-up"></i></button>
+                    <button (click)='Change(-1)'><i class="fa fa-angle-down"></i></button>
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
+       <div class="col-lg-4 col-md-4 col-sm-6 serv_block65">
+            <div class="serv_box">
+                <h2>Acquisitions</h2>
+
+                <table class="teamtable TeamDetails" width="100%">
+                        <tbody>
+
+                        <tr>
+                            <td style="color: #004785; font-weight: 500">
+                                Number of deals
+                            </td>
+                            <td  >
+                                {{num_acq}}
+                            </td>
+                        </tr>
+                     
+                        <tr>
+                            <td style="color: #004785; font-weight: 500">
+                                Deal quality
+                            </td>
+                            <td  >
+                                {{acq_quality}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: #004785; font-weight: 500">
+                                Avg Premium
+                            </td>
+                            <td  >
+                                {{ acq_premium}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: #004785; font-weight: 500">
+                                Fees
+                            </td>
+
+                            <td  >
+                                {{ acq_fees}}
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+
+            </div>
+       </div>
+
+       <div class="col-lg-4 col-md-4 col-sm-6 serv_block65">
+            <div class="serv_box">
+                <h2>Sales</h2>
+
+                <table class="teamtable" width="100%">
+
+                        <tbody>
+ 
+                         <tr>
+                             <td style="color: #004785; font-weight: 500">
+                                 Number of deals
+                             </td>
+                             <td  >
+                                 {{ num_sales}}
+                             </td>
+                         </tr>
+                      
+                         <tr>
+                             <td style="color: #004785; font-weight: 500">
+                                 Deal quality
+                             </td>
+                             <td  >
+                                 {{ sales_quality}}
+                             </td>
+                         </tr>
+                         <tr>
+                             <td style="color: #004785; font-weight: 500">
+                                 Avg Premium
+                             </td>
+                             <td  >
+                                 {{ sales_premium}}
+                             </td>
+                         </tr>
+                         <tr>
+                             <td style="color: #004785; font-weight: 500">
+                                 Fees
+                             </td>
+ 
+                             <td  >
+                                 {{ sales_fees}}
+                             </td>
+                         </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 serv_block65">
+                <div class="serv_box">
+                        <h2>Financials</h2>
+                        <table width="100%" class="teamtable">
+                            <tbody>
+                                <tr>
+                                    <td style="color: #004785; font-weight: 500">Fees:</td>
+                                    <td>{{total_acq_sales}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #004785; font-weight: 500">Expense:</td>
+                                    <td>{{expenses}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #004785; font-weight: 500">Income:</td>
+                                    <td>{{net_income}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #004785; font-weight: 500">Equity:</td>
+                                    <td>{{equity}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #004785; font-weight: 500">ROE:</td>
+                                    <td>{{roe}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="perform_sec">
+<div class="container">
+    <div class="finance_category" style="height:400px">
+        
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <!-- <canvas id='League_Table' height="85" width="100%"> </canvas> -->
+    </div>
+</div>
+</div>
+
+
+</div>

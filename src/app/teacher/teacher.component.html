@@ -1,0 +1,286 @@
+<body>
+ <div class="top_head_section">
+  <div class="container clears">
+      <div class="top_head">
+
+          <nav class="navbar">
+
+                  <span class="open-slide">
+                      <div   onclick="openSideMenu()">
+                          <i class="fa fa-bars"></i>
+                      </div>
+                  </span>
+      
+          </nav>
+          
+          <div class="top_left05">
+              <div class="logo"> <img src='assets/Fmi_login.png'></div>
+          </div>
+
+
+          <div class="top_right side-nav" id="side-menu">
+
+              <div class="total_menu">
+
+                  <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+
+                  <div class="menu">
+                      <div class="topnav">
+                          <ul>
+                         
+                          <li class="active" ><a routerLink="/teacher">Main Screen </a></li>
+                          <li><span routerLink="/announcements">Announcements</span></li>
+                          <li><span routerLink="/performance">Performance Summary</span></li>
+                          <li><span routerLink="/siminfo">All Info</span></li>  
+
+          
+                          <li>
+
+                             <span>Teacher <i class="fa fa-angle-down"></i></span>
+                             <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>Logout</span></div>
+                          
+                          </li> 
+
+
+                          </ul>
+                      </div>
+                  
+
+                  </div>
+
+             </div>
+
+          </div>
+
+      </div>
+
+  </div>
+</div>
+
+
+
+
+<section class="teacher_section padd">
+  <div class="container">
+    <div class="topHead">
+      <!-- <h2 class="title">Main Screen</h2> -->
+      <ul class="btn_grp01">
+        <li><button style="color:#498b2b; border-color:#498b2b"  (click)='Activate()'>Activate</button></li>
+        <li><button style="color:#004785; border-color:#004785"  (click)='Activateperformance()'>Activate Performance</button></li>
+        <li><button style="margin:10px" (click)='Deactivateperformance()'>Deactivate Performance</button></li>
+        <li><button style="color:#de7c00; border-color:#de7c00" (click)='Reset()'>Reset</button></li>
+        <li><button style="color:#ab0a3d; border-color:#ab0a3d"  (click)='Stop()'>Stop</button></li>
+        <li><label>Duration:</label><input [(ngModel)]="deal_dur"><button (click)= 'changeDuration()' >Change</button></li>
+
+      </ul>
+    </div>
+
+    <div class="tech_cont15">
+      <div class="row">
+        <div class="col-lg-4">
+            <div class="finance_category left_score">
+                <h2>Score Table</h2>
+                <div  class="table_cover">
+                    <table width="100%" class="score_tble">
+                      <thead>
+                          <tr class="table100-head" >
+                              <th>Bank</th>
+                              <th>Score</th>
+                          </tr>
+                      </thead>
+                      
+                      <tbody *ngFor="let x of scores" >                
+                          <tr>
+                              <td style="color:#004785"> {{x.bank}}</td>
+                              <td> {{x.score}}</td>
+                          </tr>
+                      </tbody>
+                      
+                    </table>
+                </div>
+            </div>
+
+            <div class="finance_category" style="margin: 0">
+
+                <div class="sub_head15">
+                    <h2>Admin Info</h2>
+                    <button (click)='ModifyInfo()' type="submit" style="color:#498b2b; border-color:#498b2b">Save</button>
+                </div>
+                
+                <div  class="table_cover">
+                    <table width="100%" class="score_tble">
+                      <tbody>
+                          <tr >
+                              <td>
+                                  Fees:
+                                  
+                              </td>
+                              <td  [(ngModel)]="fees" ngDefaultControl (input)="fees=$event.target.innerText" contenteditable>{{fees}}</td>
+                          </tr>
+                          <tr>
+                            <td>
+                                Base Quality:
+                                
+                            </td>
+                            <td [(ngModel)]="basequality" (input)="basequality=$event.target.innerText" contenteditable>{{basequality}}</td>
+                        </tr>
+                        <tr >
+                          <td>
+                              Equity:
+                              
+                          </td>
+                          <td  [(ngModel)]="equity" (input)="equity=$event.target.innerText" contenteditable>{{equity}}</td>
+                      </tr>
+                      <tr >
+                        <td>
+                            Acquisition Base Premium:
+                            
+                        </td>
+                        <td [(ngModel)]="acq_basepremium" (input)="acq_basepremium=$event.target.innerText"  contenteditable>{{acq_basepremium}}</td>
+                    </tr>
+                    <tr >
+                      <td>
+                          Acquisition Premium Cap:
+                          
+                      </td>
+                      <td [(ngModel)]="acq_premiumcap" (input)="acq_premiumcap=$event.target.innerText"  contenteditable>{{acq_premiumcap}}</td>
+                    </tr>
+                    <tr >
+                      <td>
+                          Sales Base Premium:
+                          
+                      </td>
+                      <td [(ngModel)]="sales_basepremium"  (input)="sales_basepremium=$event.target.innerText" contenteditable>{{sales_basepremium}}</td>
+                    </tr>
+                    <tr >
+                      <td>
+                          Sales Premium Cap:
+                          
+                      </td>
+                      <td [(ngModel)]="sales_premiumcap" (input)="sales_premiumcap=$event.target.innerText" contenteditable >{{sales_premiumcap}}</td>
+                    </tr>
+                    <tr >
+                      <td>
+                          Expenses:
+                          
+                      </td>
+                      <td [(ngModel)]="expenses" (input)="expenses=$event.target.innerText" contenteditable>{{expenses}}</td>
+                    </tr>
+                    </tbody>
+                    
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="finance_category client_right">
+                <div class="sub_head15">
+                <h2>Add Clients</h2>
+                <ul class="btn_grp01">
+                  <li><button class="dflt_btn66" style="color:#498b2b; border-color:#498b2b" (click)= 'addClient()'>Save</button></li>
+                  <li><button class="dflt_btn66" style="color:crimson; border-color:crimson" (click)='addNewClient()'>Clear</button></li>
+                </ul>
+                </div>
+               
+                <div class="addclient_content">
+                <div class="serv_input_part">
+                  <table width="100%">
+                    <tr>
+                      <td style="width:33%">
+                        <label class="" >Which Bank?:</label>
+                        <select [(ngModel)]='client_of_bank' required>
+                        <option *ngFor="let x of bank_list" value={{x}}>{{x}}</option>
+                        </select>
+                      </td>
+                      <td style="width:33%">
+                          <label class="">Client Name:</label>
+                          <input [(ngModel)]='client_name ' required placeholder="Enter Value here" />
+                      </td>
+                      <td style="width:33%">
+                          <label class="">Sector:</label>
+                          <select [(ngModel)]='sector' required>
+                            <option *ngFor="let x of sector_list" value={{x}}>{{x}}</option>
+                         </select>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="serv_input_part">
+                    <table width="100%">
+                      <tr>
+                        <td style="width:33%">
+                            <label class="">Index:</label>
+                            <input [(ngModel)]='index' required  placeholder="Enter Value here" />
+                            <!-- <input [(ngModel)]='index' required /> -->
+                        </td>
+                        <td style="width:calc(100% - 33%)">
+                            <label>Description:</label>
+                            <input [(ngModel)]='desc' required placeholder="Enter Value here" />
+                        </td>
+                      </tr>
+                    </table>
+                </div>
+                
+             
+
+                <div class="serv_input_part">
+                    <table width="100%">
+                      <tr>
+                          <td style="width:33%">
+                              <label class="">Total Assets:</label>
+                              <input [(ngModel)]='total_assets' required placeholder="Enter Value here" />
+                          </td>
+                          <td style="width:33%">
+                              <label class="">Revenue:</label>
+                              <input [(ngModel)]='revenue' required placeholder="Enter Value here" />
+                          </td>
+                          <td style="width:33%">
+                              <label class="">EBIT:</label>
+                              <input [(ngModel)]='ebit' required placeholder="Enter Value here" />
+                          </td>
+                      </tr>
+                    </table>
+                </div>
+
+                <div class="serv_input_part">
+                    <table width="100%">
+                      <tr>
+                          <td style="width:33%">
+                              <label class="">Net Income:</label>
+                              <input [(ngModel)]='net_inc' required placeholder="Enter Value here" />
+                          </td>
+                          <td style="width:33%">
+                              <label class="">No of Shares:</label>
+                              <input [(ngModel)]='num_shares' required placeholder="Enter Value here"/>
+                          </td>
+                          <td style="width:33%">
+                              <label class="">Market Cap:</label>
+                             <input [(ngModel)]='market_cap' required placeholder="Enter Value here" />
+                          </td>
+                      </tr>
+                    </table>
+                </div>
+                </div>
+
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</section>
+
+
+
+    </body>
+
+  
+  
+

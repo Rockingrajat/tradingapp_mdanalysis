@@ -1,0 +1,180 @@
+<body>
+
+    <div class="top_head_section">
+        <div class="container clears">
+            <div class="top_head">
+
+                    <nav class="navbar">
+
+                            <span class="open-slide">
+                                <div   onclick="openSideMenu()">
+                                    <i class="fa fa-bars"></i>
+                                </div>
+                            </span>
+                
+                        </nav>
+
+                
+                <div class="top_left05">
+
+                    <div class="logo"> <img src='assets/Fmi_login.png'></div>
+                    
+                </div>
+
+
+
+
+                <div class="top_right side-nav" id="side-menu">
+
+                    <div class="total_menu">
+                        <div  class="btn-close" onclick="closeSideMenu()">&times;</div>
+                
+
+                    <div class="menu">
+                        <div class="topnav">
+                            <ul>
+                               <li class="active"><a  routerLink="/clients">Clients</a></li>
+                               <li><a routerLink="/announcements">Announcements</a></li>
+                               <li><a routerLink="/deals">Deals</a></li>
+                               <li><a routerLink="/market">Market Info</a></li>
+                               <li *ngIf="performance==true"><a routerLink="/performance" >Performance</a></li>
+                                <li><span>{{bank | uppercase}} <i class="fa fa-angle-down"></i></span>
+                                    <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>Logout</span></div>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        
+
+
+                    </div>
+                </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="trade_section padd">
+
+        <div class="container">
+
+            <!-- <div class="title_head">
+                <h3 class="title22">Client</h3>
+            </div> -->
+
+
+            <div class="client_row">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 margin_btm_rsp20">
+                        <div class="finance_category analyst98 client">
+                            <h2>Client Info</h2>
+                            <div class="table_cover">
+                                <div class="client_table">
+                                <table width="100%">
+
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Index</th>
+                                        <th>Total assets</th>
+                                        <th>Revenue</th>
+                                        <th>EBIT</th>
+                                        <th>NetIncome</th>
+                                        <th>No Of Shares</th>
+                                        <th>Market Cap</th>
+                                    </tr>
+
+                                    <tr *ngFor="let x of clients">
+                                        <td>{{x.client_name}}</td> 
+                                        <td>{{x.index}}</td>
+                                        <td>{{x.total_assets}}</td>
+                                        <td>{{x.revenue}}</td>
+                                        <td>{{x.ebit}}</td>
+                                        <td>{{x.net_inc}}</td>
+                                        <td>{{x.num_shares}}</td>
+                                        <td>{{x.market_cap}}</td>
+                                    </tr>
+
+
+                                    
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5">
+                        <div class="finance_category">
+
+                            <h2>Chat</h2>
+                                <table width="100%">
+
+                                    <tr>
+                                        <td style="border: 1px solid white;">
+                                          <table width="100%" class="chat_btn_group">
+                                                <tr>
+                                                    <td>
+                                                        <div class="sm_btn_grp" *ngFor="let x of [1,2,3,4,5,6]">
+                                                            <div class="" *ngIf="('bank'+x)!= bank">
+                                                                <button id="{{x}}" (click)='chatOpenbanks($event)' class='BankButton'> Chat{{x}} {{Unread[x]}}</button> 
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table width="100%">
+                                                <div style="overflow-y: scroll; height: 150px;width: 100%;" class="msg_box">
+                                                <div *ngFor="let m of messagelistbanks" style="text-align: left; width:16.276vw;">
+                                                    {{m.sender |uppercase}}:{{m.body}}
+                                                </div>
+                                                </div>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table width="100%">
+                                                    <div class="write_box">
+                                                        <input class="NewMessage" [(ngModel)]='new_message_btwnbanks ' placeholder="Input your message">
+                                                    </div>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table width="100%" class="chat_btm_btn">
+                                                <tr>
+                                                    <td><button (click)='Submitbtwnbanks() ' class="dft_btn2">Submit</button></td>
+                                                    <!-- <td><button (click)='clearChatbtwnbanks() ' class="dft_btn2" style="background: #004785">Clear all chat</button></td> -->
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+           
+
+
+                                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+
+
+    </body>
+
