@@ -3,7 +3,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import * as firebase from 'firebase/app'
 import { Router } from '@angular/router';
-import * as CanvasJS from '../../assets/canvasjs.min';
+// import * as ChartJS from '../../assets/angularchart.min';
+import  {ChartsModule} from 'ng2-charts';
+import {Chart} from 'chart.js';
 import { SelectControlValueAccessor } from '@angular/forms';
 @Component({
   selector: 'app-performance',
@@ -13,7 +15,8 @@ import { SelectControlValueAccessor } from '@angular/forms';
 export class PerformanceComponent implements OnInit {
 
   constructor(public afs: AngularFirestore, public router: Router) { }
-  id 
+  id
+  chart
   num_acq
   acq_quality
   acq_premium
@@ -149,12 +152,21 @@ export class PerformanceComponent implements OnInit {
   
  async PlotGraph(){
     let data : Array<any> = []
-   
+    let x : Array<any> = []
+    let bg : Array<any> = []
     await this.afs.collection('deals').get().toPromise().then(querysnap=>{
       
       querysnap.forEach(res=>{
+        console.log(res.data().roe)
         if(res.data().roe!=-10){
-        data.push({y:res.data().roe, label:res.id})
+        data.push(res.data().roe)
+        if(res.data().roe<0){
+          bg.push('rgb(170, 0, 0)')
+        }
+        else{
+          bg.push('rgb(90, 220, 0)')
+        }
+        x.push(res.id)
         }
         
         
@@ -162,35 +174,45 @@ export class PerformanceComponent implements OnInit {
       })
     })
     
-    let chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
-      exportEnabled: true,
-      title: {
-        text: "LeaderBoard"
-      },
-      dataPointWidth: 30,
+    this.chart = new Chart("chartContainer", {
+      //animationEnabled: true,
+      // exportEnabled: true,
+      
+
+      type: "bar",
+      // title: {
+      //   text: "LeaderBoard"
+      // },
+      // dataPointWidth: 30,
       
       
-      data: [{
-        type: "column",
-        color: 'rgb(90, 220, 0)',
-        dataPoints: data
-      }]
+      // 
+      data: {
+        labels: x,  
+        datasets: [{
+            label:"Leaderboard",
+            barThickness: 60,
+            backgroundColor: bg ,
+            minBarLength: 2,
+            data: data//[10,20,30,40]
+        }]
+    }
 
     });
-    this.setColor(chart)
-    chart.render();
-
+    //this.setColor(this.chart)
+    
+    //this.chart.render()
   }
-  setColor(chart){
-    for(var i = 0; i < chart.options.data.length; i++) {
-      let dataSeries = chart.options.data[i];
-      for(var j = 0; j < dataSeries.dataPoints.length; j++){
-        if(dataSeries.dataPoints[j].y <= 0)
-          dataSeries.dataPoints[j].color = 'rgb(170, 0, 0)';
-      }
-    }
-  }
+  // setColor(chart){
+  //   for(var i = 0; i < chart.data.labels.length; i++) {
+  //       console.log(chart.data.datasets[0].data)
+  //       if(chart.data.datasets[0].data[i] <= 0)
+  //       chart.data.datasets[0].backgroundColor = ;
+  //     }
+    
+  // }
+  // let dataSeries = chart.options.data[i];
+  // for(var j = 0; j < dataSeries.dataPoints.length; j++){
    Change(num) {
      if(!(this.id==this.max_bank && Number(num)==1) && !(this.id==1 && Number(num)==-1) ){
     try {
@@ -247,6 +269,9 @@ export class PerformanceComponent implements OnInit {
             this.net_income =  Number(this.net_income.toFixed(2))
             this.roe = (this.net_income)*100/this.equity
             this.roe = Number(this.roe.toFixed(2))
+            this.afs.collection('deals').doc('bank'+this.id).set({
+              roe : this.roe
+            },{merge:true})
             this.PlotGraph()
         })
 

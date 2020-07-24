@@ -40,7 +40,7 @@
                             <li *ngIf="IsTeacher=='false'" ><a routerLink="/market">Market Info</a></li>
                             <li class="active"  *ngIf="IsTeacher=='true'" ><a routerLink="/performance" >Performance Summary</a></li>
                             <li class="active" *ngIf="IsTeacher=='false'"><a  routerLink="/performance" >Performance</a></li>
-                            <li *ngIf="IsTeacher=='true'" class="active" ><a routerLink="/siminfo">All Info</a></li>
+                            <li *ngIf="IsTeacher=='true'" ><a routerLink="/siminfo">All Info</a></li>
                             <li><span>{{bank | uppercase}} <i class="fa fa-angle-down"></i></span>
                             <div (click)='Logout()' class="logout02"><span class="Logout"><i class="fa fa-sign-out"></i>{{bank | uppercase}}</span></div>
 
@@ -236,9 +236,9 @@
 
 <div class="perform_sec">
 <div class="container">
-    <div class="finance_category" style="height:400px">
+    <div class="finance_category">
         
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <canvas id="chartContainer" >{{chart}}</canvas>
         <!-- <canvas id='League_Table' height="85" width="100%"> </canvas> -->
     </div>
 </div>

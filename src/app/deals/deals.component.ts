@@ -11,15 +11,15 @@ import { AppComponent } from '../app.component';
 export class DealsComponent implements OnInit {
 
   constructor(public afs: AngularFirestore, public myapp: AppComponent, public route: ActivatedRoute, public router: Router) { }
-  client_name
-  price
-  bank
+  client_name=""
+  price=""
+  bank=""
   subs
   sector
   bank_num
   add_info=' '
   docid
-  myclient
+  myclient = ""
   client_list: Array<any> = []
   my_clients : Array<any> = []
   rec_offers: Array<any> = []
@@ -264,7 +264,9 @@ export class DealsComponent implements OnInit {
   console.log(this.client_list)
   }
   async SendOffer(){
-      
+    let val = (this.client_name!="") && (this.bank!="") && (this.price!="") && (this.myclient!="");
+    console.log(val);
+  if(val){
     await this.afs.collection("offers").doc(this.client_name).get().toPromise().then(doc=>{
       if (doc.exists) {
           this.sector = doc.data().sector;          
@@ -299,7 +301,9 @@ export class DealsComponent implements OnInit {
     time:0,
     start_timer:0
   }
-  if(offere){
+  
+  
+  
   this.afs.collection('pend_rec').doc(this.bank_num).set({
     unannounced: firebase.firestore.FieldValue.arrayUnion(offere)
   },{merge:true})
@@ -309,7 +313,7 @@ export class DealsComponent implements OnInit {
   },{merge:true})
 
   alert('Offer sent succesfully to '+this.bank_num)
-}
+  }
 else{
     alert('Fill in ALL Fields!')
 }
@@ -386,31 +390,31 @@ async ConfirmReceivedOffer(event){
       }
     });
 });
-await this.afs.firestore.collection("pend_rec").doc(this.bank).get().then(doc=>{
-  
-      
-      if (doc.data().offer && doc.data().offer.length>0) {
-      for(const key in doc.data().offer){
-        if(doc.data().offer[key].client_name==client){
-          console.log('Client Found',doc.data().offer[key]);
-          
-          this.afs.collection('pend_rec').doc(this.bank).update({
-          offer: firebase.firestore.FieldValue.arrayRemove(doc.data().offer[key])
-          
-          }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
-        this.afs.collection('pend_sent').doc(doc.data().offer[key].offer_made_by).update({
-          offer: firebase.firestore.FieldValue.arrayRemove(doc.data().offer[key])
-        })
-        
 
-          break
-        }
-      }
-    }
+this.afs.firestore.collection("pend_rec").doc(event.bank_num).get().then(doc=>{
   
-});
+            
+  if (doc.data().offer.length>0) {
+  for(const key in doc.data().offer){
+    
+    if(doc.data().offer[key].client_name==event.client_name){
+      
+      
+      this.afs.collection('pend_rec').doc(this.bank).update({
+      offer: firebase.firestore.FieldValue.arrayRemove(doc.data().offer[key])
+      
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    this.afs.collection('pend_sent').doc(doc.data().offer[key].offer_made_by).update({
+      offer: firebase.firestore.FieldValue.arrayRemove(doc.data().offer[key])
+    })
+    }
+  }
+}
+
+  });
+  
   this.my_announced_clients.push(event.client_name)
   await this.afs.firestore.collection('pend_rec').doc(this.bank).update({
     unannounced: firebase.firestore.FieldValue.arrayRemove(event)
@@ -602,6 +606,32 @@ var prevscore2
         this.afs.collection('deals').doc(event.offer_made_by).update({
           score : score+prevscore2
         })
+        
+        this.afs.firestore.collection("pend_rec").doc(event.bank_num).get().then(doc=>{
+  
+          
+          if (doc.data().unannounced.length>0) {
+          for(const key in doc.data().unannounced){
+            
+            if(doc.data().unannounced[key].client_name==event.client_name){
+              console.log('Client Found',doc.data().unannounced[key]);
+              
+              this.afs.collection('pend_rec').doc(this.bank).update({
+              unannounced: firebase.firestore.FieldValue.arrayRemove(doc.data().unannounced[key])
+              
+              }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+            this.afs.collection('pend_sent').doc(doc.data().unannounced[key].offer_made_by).update({
+              offer: firebase.firestore.FieldValue.arrayRemove(doc.data().unannounced[key])
+            })
+            }
+          }
+        }
+      
+          });
+
+          
       
       }
 

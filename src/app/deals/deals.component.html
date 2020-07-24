@@ -74,26 +74,33 @@
                             <tr>
                                 <td style="width:18%">
                                     <label>Client</label>
-                                    <select *ngIf="activate==true" [(ngModel)]='myclient' required>
+                                    <select *ngIf="activate==true;else t" [(ngModel)]='myclient' required>
                                     <option *ngFor="let x of my_clients" value={{x}}>{{x}}</option>
                                     </select>
-                                    <input *ngIf="activate==false" type="number" placeholder="Client name" [(ngModel)]='price'  required>
+                                    <ng-template #t>
+                                    <input type="number" placeholder="Client name" required>
+                                    </ng-template>
                                 </td>
     
                                 <td style="width:18%">
                                     <label>Bank</label>
-                                    <select *ngIf="activate==true" [(ngModel)]='bank_num' (change)="getClients($event.target.value);" required>
+                                    <select *ngIf="activate==true;else y" [(ngModel)]='bank_num' (change)="getClients($event.target.value);" required>
                                     <option *ngFor="let x of bank_list" value={{x}}>{{x}}</option>
                                     </select>
-                                    <input *ngIf="activate==false" type="number" placeholder="Bank" [(ngModel)]='price'  required>
+                                    <ng-template #y>
+                                    <input type="number" placeholder="Bank" required>
+                                    </ng-template>
                                 </td>
     
                                 <td style="width:18%">
                                         <label>Acquire Client</label>
-                                        <input *ngIf="activate==false" type="number" placeholder="Acquire Client" [(ngModel)]='price'  required>
-                                        <select *ngIf="activate==true" [(ngModel)]='client_name' required>
+                                        
+                                        <select *ngIf="activate==true;else r" [(ngModel)]='client_name' required>
                                             <option *ngFor="let x of client_list" value={{x}}>{{x}}</option>
                                          </select>
+                                         <ng-template #r>
+                                            <input type="number" placeholder="Acquire Client"  required>
+                                         </ng-template>
                                          
                                 </td>
                                 

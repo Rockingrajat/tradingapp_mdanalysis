@@ -56,7 +56,7 @@ export class TeacherComponent implements OnInit {
         this.bank_list =[]
           
           querySnapshot.forEach(doc=>{
-              if(doc.id!='Activation' && doc.id!='Stop' && doc.id!='info' ){
+              if(doc.id!='Activation' && doc.id!='Stop' && doc.id!='info' && doc.id!='Duration' ){
                 this.bank_list.push(doc.id);
               }
               console.log('bank list', this.bank_list)
@@ -328,9 +328,9 @@ export class TeacherComponent implements OnInit {
   }
   changeDuration(){
     this.afs.collection('Teacher').doc('Duration').set({
-      val: this.deal_dur
+      val: Number(this.deal_dur)
     },{merge:true})
-    console.log("duration changed")
+    alert("Duration changed")
   }
   Deactivateperformance(){
     this.afs.collection('Teacher').doc('Activation').set({
@@ -442,7 +442,8 @@ export class TeacherComponent implements OnInit {
       messages: firebase.firestore.FieldValue.arrayUnion(text)
     })
     this.afs.collection('offers').doc(this.client_name).set({
-      sector:this.sector
+      sector:this.sector,
+      bank: this.client_of_bank
     },{merge:true})
     alert('Client added to '+this.client_of_bank+" succesfully!")
   }

@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tradingapp"
+    }
+  },
+  "defaultProject": "tradingapp",
+  "cli": {
+    "analytics": false
+  }
 }
